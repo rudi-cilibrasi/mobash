@@ -127,12 +127,13 @@ define work flows as sequences of function calls.
 
 By using this utility to generate boilerplate bash shell scripts that suppport
 convenient function sharing it becomes possible to use CircleCI and `make`
-without sacrificing the DRY (Do Not Repeat Yourself) principle. You can
-still use CircleCI steps but you must first checkout or clone the source code
-and then only put simple one-liners that just invoke bash with the name of
-a bash function with some parameters and environment variables. By making
-sure that all your CircleCI lines are just 1-liners and simple it becomes
-a pure delegation pattern and then you can access the same underlying
+without sacrificing the [DRY (Do Not Repeat Yourself)
+principle](https://www.earthdatascience.org/courses/earth-analytics/automate-science-workflows/write-efficient-code-for-science-r/).
+You can still use CircleCI steps but you must first checkout or clone the
+source code and then only put simple one-liners that just invoke bash with the
+name of a bash function with some parameters and environment variables. By
+making sure that all your CircleCI lines are just 1-liners and simple it
+becomes a pure delegation pattern and then you can access the same underlying
 shell script functionality via CircleCI or from a bash shell in a developer
 environment locally for testing and debugging.
 
