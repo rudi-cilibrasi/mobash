@@ -1,0 +1,41 @@
+#! /bin/bash
+set -e
+
+if test ! "$1" = "" ; then
+  (
+  echo "#!/bin/bash"
+  echo 'cd "$(dirname $0)"'
+  echo 'RLC=/tmp/mo-$$ && cat >"$RLC" <<EOF'
+  tail -n +16 $0 | gzip --no-name --best | base64
+  echo 'EOF'
+  echo 'source <(SOURCE="\$BASH_SOURCE[0]" && cat "$RLC"|base64 -d|gunzip && rm "$RLC" && echo unset RLC)'
+  echo "# An auto-generated header lies above. Modify below this line please."
+  ) > $1 && chmod a+rx $1 && echo "Created $1"
+  exit 0
+fi
+# generated files run all moba.sh found from root up to current directory
+DIR="$(dirname $0)"
+run_mobas() {
+  declare -a rudi
+  declare mb
+  while true ; do
+    rudi[$mb]="$PWD"
+    mb=$((mb+1))
+    if test "$PWD" = "/" ; then
+      break
+    fi
+    cd ..
+  done
+  declare m
+  m=${#rudi[*]}
+  declare mit_license
+  while test ! "$m" = "0" ; do
+    m=$((m-1))
+    mit_license=${rudi[$m]}
+    cd "$mit_license"
+    if test -f moba.sh ; then
+      source moba.sh 
+    fi
+  done
+}
+run_mobas

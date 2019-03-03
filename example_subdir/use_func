@@ -1,0 +1,12 @@
+#!/bin/bash
+cd "$(dirname $0)"
+RLC=/tmp/mo-$$ && cat >"$RLC" <<EOF
+H4sIAAAAAAACA1VRPU/DMBTc8ysON0MCSikzytaFDbEwoKqy4xdiEdvIdoRQ1f/Oi4EmnWzfPd+H
+vcE7OQoykUZvRooIk4McR1iv5DYO6P3kmAveInifMH0ieXRTCOQStAnUJR++i/3TSyvKigEnLaHc
+1aJgreOsE6sapwLQ1I0yEBrJNtqsEKv48DVwAqQwER6hPSPIc2+lVQcWf37diwxa1ZZVZdXdQ11n
+wPRIFBN+Z9BC3AvWSAO5zAMqkPzI+97kpdPYbucE3tE6CO9tW5422fj2cF5zJh1H05GLtKSdbW/Y
+2GbbnVii2xyy+c+4us36f72yfg7DCsuAuGrV9JffuOoU/RQ6unBLu9zpvDx/8QPZV1sH5wEAAA==
+EOF
+source <(SOURCE="\$BASH_SOURCE[0]" && cat "$RLC"|base64 -d|gunzip && rm "$RLC" && echo unset RLC)
+# An auto-generated header lies above. Modify below this line please.
+r_inside
