@@ -14,7 +14,6 @@ if test ! "$1" = "" ; then
   exit 0
 fi
 # generated files run all moba.sh found from root up to current directory
-DIR="$(dirname $0)"
 run_mobas() {
   declare -a rudi
   declare mb
