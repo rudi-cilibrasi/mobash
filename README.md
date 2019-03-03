@@ -1,19 +1,40 @@
-# Freedom from make, circleci, and dockerfile
+# Freedom from messy bash shell scripts
+# Enjoy make, circleci, and dockerfile again
 
 mobash is an incremental rewiring tool that lets you cut tight linkages
-to bad syntaxes and vendor lockin. It helps you develop and maintain low
+to bad syntaxes and vendor lock-in. It helps you develop and maintain low
 maintenance high clarity bash shell function libraries while still
 providing continuous compatibility with legacy make and CircleCI systems.
 In this way it represents a credible incremental refactoring path for
 any project to move away from strong dependence on technologies with
 high liability footprints and developer learning burdens.
 
-The main motivation behind this tool is to push back against bad variations
-on shell script that lead to vendor or tool lockin and reduce developer
-learning efficiency. It takes years to learn just one classic Unix shell
-script language like bash alone and so it is not reasonable to spread our
+Even though this tool is meant to help people disentangle from bad shell
+scripts, it can also be useful even for new projects as a way to organize
+a medium or large-scale shell script project into a hierarchical library
+that has good performance and high maintainability similar to ES6 modules.
+
+## Motivation
+The main motivation behind this tool is to enable modular or structured
+organization of shell scripts.  It is also meant to push back against bad
+variations on shell script that lead to vendor or tool lock-in and reduce
+developer learning efficiency. It takes years to learn just one classic Unix
+shell script language like bash alone and so it is not reasonable to spread our
 learning out to become experts in minor variations that provide little help
 for lots of work.
+
+mobash converts vendor or tool lock-in into choice. Agility makes developers
+happier and more productive.
+
+[Choice powers creativity](https://serverless.com/blog/data-lockin-vendor-choice-portability/)
+
+## Intended audience
+
+If you have shell scripts, Dockerfile, Makefile, or CircleCI config files
+that are hundreds of lines or more, this tool can help you to break your
+project into smaller pieces with less repetition and more consistency and
+clarity. mobash is a refactoring rewiring tool that enables incremental
+replacement of legacy shell script variations with standard bash functions.
 
 ## Structured Modular Bash shell scripting using mobash
 
@@ -52,8 +73,8 @@ appropriately guarded shell functions.
 
 `make` provides a reasonable developer experience because at least a local
 dev environment can invoke targets naturally from an interactive shell for
-debugging. The problems come when we look into the `make` syntax to discover
-its reliance on tabs and unfortunately limiting shell syntax. It is bash like
+debugging. The syntax is [not popular](https://news.ycombinator.com/item?id=15041986) and when we look into the `make` syntax we discover why:
+its reliance on tabs and modified shell variable syntax. It is bash like
 but requires double dollar signs, has different parameter expansion rules and
 syntax, and a non-uniform calling mode. If you want to call a make target
 from within a make rule line, everything seems fine. But if you call a make
@@ -121,9 +142,9 @@ the same functions callable from both top-level `.PHONY` Makefile targets
 as well as CircleCI steps. Then you can run those shell functions anywhere
 you want and are no longer locked into a strange non-standard syntax. Keeping
 the Makefile and CircleCI actions down to just 1-line delegations ensures
-that your dependence and lockin to old or paid-only lockin technologies is
+that your dependence and lock-in to old or paid-restricted technologies is
 minimized and your learning leads to more flexibility and freedom for you
-in your code.
+in your own code and projects.
 
 ## Example
 

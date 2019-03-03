@@ -1,12 +1,14 @@
 #!/bin/bash
+# shellcheck disable=2164,2086
 cd "$(dirname $0)"
-RLC=/tmp/mo-$$ && cat >"$RLC" <<EOF
-H4sIAAAAAAACA1VQy07DMBC85ysGN4cE1ABnlBsfwI0Dqirb2RCL2EZrWwhV/XccA0168np2dx67
-wzs5YhlpwGhmCuDkIOcZ1ivZhQmjTy732Fuw9xHpE9FDJ2ZyEYNh0tHzd5X3jstOaFqcKmAgPUsm
-7GWmHMwGsSp/vqashsiJ8ITBZwRl7q226tCL+uX1WRTQqr5uGqvuHtu2AGZEpBDxO4Me4l5kjjiR
-K31AMcmPUo+mPHpA1y0OvKOtkVzbvj7tivDt4bztmXicjSYXaHW7yN5kYVtkH8Rq3RaT+3+Pm+3M
-/5er8BczmWEdEFep9uPl8leZgk+s6dJb05VM5/X81Q9+hnkN0wEAAA==
+export RLC=/tmp/mo-$$ && cat >"$RLC" <<EOF
+H4sIAAAAAAACA1VQSw6CMBDdc4pnZQEaUNeGnQdw58IYQ2EIjRSStsQF4e6W8QOuOn0z8z5j+vau
+O5nbKMYQACUVTW4ISQ7Tl2qBaOk/z1o1BGd6whFl5xHw3DXU8paJ8Hw5CQa1zMIo0nJ7iGMGVAVH
+1uE9gwxiJzyHq6nlPiAN5Q+uK8VPUSJNJwddS0sjvtZZOKxZeHMblz3l7o0qqLU0u51kV15Ys+xe
+zNY1m0y+Hhfbnv+Ti/nZjGeYB8RfqqTCdMXU1v+ZbNebgn69OR1nGgPzPX/wAoNPWeWJAQAA
 EOF
-source <(SOURCE="\$BASH_SOURCE[0]" && cat "$RLC"|base64 -d|gunzip && rm "$RLC" && echo unset RLC)
+(base64 --decode <"$RLC" |gunzip && rm "$RLC")>${RLC}.2
+# shellcheck disable=1090
+source ${RLC}.2 ; rm ${RLC}.2 ; unset RLC
 # An auto-generated header lies above. Modify below this line please.
 r_inside

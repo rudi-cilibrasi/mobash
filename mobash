@@ -4,13 +4,21 @@ set -e
 if test ! "$1" = "" ; then
   (
   echo "#!/bin/bash"
+  # shellcheck disable=2016
+  echo '# shellcheck disable=2164,2086'
+  # shellcheck disable=2016
   echo 'cd "$(dirname $0)"'
-  echo 'RLC=/tmp/mo-$$ && cat >"$RLC" <<EOF'
-  tail -n +16 $0 | gzip --no-name --best | base64
+  # shellcheck disable=2016
+  echo 'export RLC=/tmp/mo-$$ && cat >"$RLC" <<EOF'
+  tail -n +24 "$0" | grep -v '^ *#' | gzip --no-name --best | base64
   echo 'EOF'
-  echo 'source <(SOURCE="\$BASH_SOURCE[0]" && cat "$RLC"|base64 -d|gunzip && rm "$RLC" && echo unset RLC)'
+  # shellcheck disable=2016
+  echo '(base64 --decode <"$RLC" |gunzip && rm "$RLC")>${RLC}.2'
+  echo '# shellcheck disable=1090'
+  # shellcheck disable=2016
+  echo 'source ${RLC}.2 ; rm ${RLC}.2 ; unset RLC'
   echo "# An auto-generated header lies above. Modify below this line please."
-  ) > $1 && chmod a+rx $1 && echo "Created $1"
+  ) > "$1" && chmod a+rx "$1" && echo "Created $1"
   exit 0
 fi
 # generated files run all moba.sh found from root up to current directory
@@ -33,6 +41,7 @@ run_mobas() {
     mit_license=${rudi[$m]}
     cd "$mit_license"
     if test -f moba.sh ; then
+      # shellcheck disable=1091
       source moba.sh 
     fi
   done
