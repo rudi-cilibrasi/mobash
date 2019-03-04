@@ -87,13 +87,16 @@ When a CircleCI step is defined inline, it becomes impossible for developers
 to call in a local development environment. The arbitrary divergence from
 standard bash syntax means that to the degree the CircleCI steps or commands
 do more than simply delegate to shell functions that are not inline is the
-degree that the CircleCI testing environment is unique, non portable, and
-non reproducible. This leads to greater maintenance costs as different
+degree that the CircleCI testing environment is unique, non-portable, and
+non-reproducible. This leads to greater maintenance costs as different
 versions of the environment need to be made to support CircleCI instead of
 the developer local or production modes even when the functionality is
 otherwise the same. While it is easy to call a bash shell function from
 another function, it is impossible to call a CircleCI step from a shell
 function or a remote machine or from a developer interested in debugging.
+Combined with the lack of repeating single steps in CircleCI this means
+the testing cycle is made longer and information therefore comes slower
+to developers when debugging.
 
 ## Proposed solution
 
